@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>پشتیبانی برنامه</title>
+  <title>خانه</title>
   <style>
     body {
       font-family: 'Vazirmatn', sans-serif;
@@ -18,76 +18,110 @@
       padding: 20px;
       text-align: center;
     }
+    nav {
+      background-color: #45a049;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      background: linear-gradient(to right, #4caf50, #45a049);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 18px;
+    }
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 20px auto;
       padding: 20px;
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    h1, h2 {
+    h2 {
       color: #4caf50;
+      text-align: center;
+      margin-bottom: 20px;
     }
-    .download-button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px 0;
-      background-color: #4caf50;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
       text-align: center;
     }
-    .download-button:hover {
-      background-color: #45a049;
+    .feature {
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     footer {
       text-align: center;
-      padding: 10px;
+      padding: 15px;
       background-color: #4caf50;
       color: white;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>پشتیبانی برنامه</h1>
-  <p>نسخه 2.1.0 - آخرین بروزرسانی</p>
+  <h1>به سایت ما خوش آمدید</h1>
+  <p>نسخه اصلی - طراحی سبز</p>
 </header>
 
+<nav>
+  <a href="#">خانه</a>
+  <a href="#">درباره ما</a>
+  <a href="#">محصولات</a>
+  <a href="#">پشتیبانی</a>
+</nav>
+
+<section class="hero">
+  <h1>خدمات و محصولات دیجیتال</h1>
+  <p>خرید آسان، پشتیبانی سریع، تجربه متفاوت</p>
+</section>
+
 <div class="container">
-  <h2>ویژگی‌های جدید</h2>
-  <ul>
-    <li>افزودن قابلیت تم تاریک برای استفاده راحت‌تر در شب</li>
-    <li>پشتیبانی از زبان‌های جدید (عربی، انگلیسی، ترکی)</li>
-    <li>سیستم اعلان‌های هوشمند و قابل تنظیم</li>
-  </ul>
-
-  <h2>بهبودها</h2>
-  <ul>
-    <li>افزایش سرعت بارگذاری تا 40 درصد</li>
-    <li>بهینه‌سازی مصرف باتری و حافظه</li>
-    <li>بهبود کیفیت تصاویر و انیمیشن‌ها</li>
-  </ul>
-
-  <h2>رفع مشکلات</h2>
-  <ul>
-    <li>حل مشکل خروج ناگهانی در برخی دستگاه‌ها</li>
-    <li>رفع مشکل همگام‌سازی در شبکه‌های ضعیف</li>
-    <li>حل مشکلات مربوط به نمایش فونت‌های فارسی</li>
-  </ul>
-
-  <a href="app.apk" class="download-button">دانلود نسخه APK</a>
-  <a href="https://myket.ir/app/com.litebase" class="download-button">دانلود از مایکت</a>
+  <h2>چرا ما؟</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>سرعت بالا</h3>
+      <p>پردازش سریع و تحویل فوری محصولات</p>
+    </div>
+    <div class="feature">
+      <h3>پشتیبانی ۲۴/۷</h3>
+      <p>همیشه همراه شما در تمام مراحل خرید</p>
+    </div>
+    <div class="feature">
+      <h3>امنیت پرداخت</h3>
+      <p>درگاه‌های مطمئن برای پرداخت‌های شما</p>
+    </div>
+  </div>
 </div>
 
 <footer>
-  <p>© 1403 تمامی حقوق محفوظ است.</p>
+  <p>© 1403 - تمامی حقوق محفوظ است.</p>
 </footer>
 
 </body>
