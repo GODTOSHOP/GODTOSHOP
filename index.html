@@ -33,9 +33,30 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
 @keyframes starPulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.3);} }
 
 /* اسلایدر */
-.slider-container { position:relative; overflow:hidden; border-radius:25px; margin:40px 0; max-height:400px; }
-.slider { display:flex; transition: transform 1s ease-in-out; will-change: transform; pointer-events: none; }
-.slider img { width:100%; flex-shrink:0; border-radius:25px; object-fit:cover; box-shadow: 0 0 25px rgba(0,255,255,0.3); transition: transform 0.5s, box-shadow 0.5s; }
+.slider-container { 
+  position:relative; 
+  overflow:hidden; 
+  border-radius:25px; 
+  margin:40px 0; 
+  width:100%; 
+  height:auto; /* ارتفاع خودکار بر اساس تصویر */
+}
+.slider { 
+  display:flex; 
+  transition: transform 1s ease-in-out; 
+  will-change: transform; 
+  pointer-events: none; 
+}
+.slider img { 
+  width:100%; 
+  height:auto; /* ارتفاع واقعی تصویر */
+  flex-shrink:0; 
+  border-radius:25px; 
+  object-fit:cover; 
+  box-shadow: 0 0 25px rgba(0,255,255,0.3); 
+  transition: transform 0.5s, box-shadow 0.5s; 
+  display:block;
+}
 
 /* دکمه‌ها */
 .buttons { text-align:center; margin-top:35px; }
@@ -101,7 +122,7 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
     <ul>
       <li>بهبود رابط کاربری و طراحی جذاب‌تر</li>
       <li>اضافه شدن امکانات جدید در بخش سنس‌ساز</li>
-      <li> مشکلات درگاه پرداخت برطرف شد</li>
+      <li>💳 مشکلات درگاه پرداخت برطرف شد</li>
       <li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر</li>
     </ul>
   </div>
