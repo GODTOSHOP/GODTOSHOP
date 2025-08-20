@@ -34,9 +34,8 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
 
 /* اسلایدر */
 .slider-container { position:relative; overflow:hidden; border-radius:25px; margin:40px 0; max-height:400px; }
-.slider { display:flex; transition: transform 0.8s ease-in-out; will-change: transform; }
+.slider { display:flex; transition: transform 1s ease-in-out; will-change: transform; pointer-events: none; }
 .slider img { width:100%; flex-shrink:0; border-radius:25px; object-fit:cover; box-shadow: 0 0 25px rgba(0,255,255,0.3); transition: transform 0.5s, box-shadow 0.5s; }
-.slider img:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0,255,255,0.5); }
 
 /* دکمه‌ها */
 .buttons { text-align:center; margin-top:35px; }
@@ -83,13 +82,11 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
     <li>پشتیبانی ۲۴/۷</li>
   </ul>
 
-  <!-- دکمه‌ها -->
   <div class="buttons">
     <a class="myket">⏳ نصب از مایکت (به زودی)</a>
     <a href="https://cafebazaar.ir/app/GODTOSHOP.COM" class="bazar">📥 نصب از بازار</a>
   </div>
 
-  <!-- آنچه در آپدیت‌های آینده خواهید دید -->
   <h2>📸 آنچه در آپدیت‌های آینده خواهید دید</h2>
   <div class="slider-container">
     <div class="slider">
@@ -99,7 +96,6 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
     </div>
   </div>
 
-  <!-- تغییرات نسخه جدید -->
   <div class="new-features">
     <h2>✨ تغییرات نسخه جدید</h2>
     <ul>
@@ -119,7 +115,7 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
 // سال جاری
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// اسلایدر فقط خودکار
+// اسلایدر خودکار بدون دخالت کاربر
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slider img');
 let index = 0;
