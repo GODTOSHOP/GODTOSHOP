@@ -5,68 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>گادتوشاپ | اپلیکیشن حرفه‌ای گیمینگ</title>
 <style>
-  /* فونت */
-  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-  body {
-    margin:0;
-    padding:0;
-    font-family: 'Vazirmatn', sans-serif;
-    background: black;
-    overflow: hidden;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
 
-  /* اسلایدر */
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-  }
-  .slider img {
-    position: absolute;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
-  .slider img.active {
-    opacity: 1;
-    z-index: 1;
-  }
+/* پس‌زمینه Gradient و Stars */
+body {
+  margin:0;
+  padding:0;
+  font-family:'Vazirmatn', Tahoma, sans-serif;
+  overflow-x:hidden;
+  position:relative;
+  background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;
+}
+canvas#stars { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-  /* شماره سال */
-  #year {
-    position: absolute;
-    bottom: 10px;
-    right: 20px;
-    color: cyan;
-    font-weight: bold;
-    font-size: 18px;
-  }
+/* هدر */
+header {
+  text-align:center;
+  padding:25px;
+  position:relative;
+}
+header img {
+  max-width:180px;
+  border-radius:20px;
+  box-shadow: 0 0 35px #0ff;
+  transition: transform 0.5s, filter 0.5s, box-shadow 0.5s;
+  filter: drop-shadow(0 0 15px #0ff);
+}
+header img:hover {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 0 70px #0ff;
+  filter: drop-shadow(0 0 25px #0ff);
+}
 
-  /* Canvas پس‌زمینه */
-  #stars {
-    position: fixed;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
+/* محتوا */
+section { padding:40px; max-width:1000px; margin:auto; }
+h1,h2 { text-align:center; color:#fff; text-shadow: 1px 1px 15px rgba(0,255,255,0.5); }
+p { margin:20px 0; font-size:1.1rem; color:#ddd; text-shadow: 0 0 5px #0ff; }
+ul { list-style:none; padding:0; }
+ul li {
+  background: rgba(255,255,255,0.05);
+  margin:12px 0;
+  padding:18px 22px;
+  border-radius:20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 25px rgba(0,255,255,0.1);
+  transition: transform 0.4s, box-shadow 0.4s, background 0.4s, filter 0.4s;
+  display:flex;
+  align-items:center;
+  filter: drop-shadow(0 0 5px #0ff);
+}
+ul li:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 35px rgba(0,255,255,0.3);
+  background: rgba(0,255,255,0.1);
+  filter: drop-shadow(0 0 10px #0ff);
+}
+ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: starPulse 2s infinite; }
+@keyframes starPulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.4);} }
+
+/* اسلایدر Fade حرفه‌ای */
+.slider-container { position:relative; overflow:hidden; border-radius:25px; margin:40px 0; width:100%; height:auto; }
+.slider { position:relative; width:100%; height:auto; }
+.slider img {
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:auto;
+  border-radius:25px;
+  object-fit:cover;
+  opacity:0;
+  transition: opacity 1.5s ease-in-out, transform 1.5s;
+  box-shadow: 0 0 50px rgba(0,255,255,0.5);
+  filter: drop-shadow(0 0 15px #0ff);
+}
+.slider img.active {
+  opacity:1;
+  transform: scale(1.02);
+}
+
+/* دکمه‌ها نئونی */
+.buttons { text-align:center; margin-top:35px; }
+.buttons a {
+  display:inline-block;
+  margin:12px;
+  padding:16px 32px;
+  border-radius:15px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+  font-size:16px;
+  transition: all 0.4s;
+  box-shadow: 0 0 20px #0ff;
+  position:relative;
+}
+.buttons a:hover { transform: scale(1.1); box-shadow: 0 0 60px #0ff; }
+.bazar { background: linear-gradient(45deg,#00c853,#b2ff59);}
+.myket { background: linear-gradient(45deg,#ff1744,#ff5252); cursor:default; }
+
+/* تغییرات نسخه جدید */
+.new-features { background: rgba(255,255,255,0.05); padding:25px; border-radius:20px; margin-top:45px; backdrop-filter: blur(6px); box-shadow:0 0 35px rgba(0,255,255,0.1); }
+.new-features ul li { margin-bottom:14px; font-size:1.05rem; color:#ddd; display:flex; align-items:center; filter: drop-shadow(0 0 5px #0ff);}
+.new-features li::before { content:"✨"; margin-left:10px; font-size:1.2rem; animation: sparkle 2s infinite; }
+@keyframes sparkle { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.4);} }
+
+/* فوتر */
+footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size:14px; text-shadow:0 0 15px #0ff; }
+
+/* ریسپانسیو */
+@media(max-width:600px){ section{padding:20px;} .buttons a{padding:12px 20px;font-size:14px;} }
+
 </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
 
-<div class="slider">
-  <img src="slide1.jpg" class="active" alt="اسلاید 1">
-  <img src="slide2.jpg" alt="اسلاید 2">
-  <img src="slide3.jpg" alt="اسلاید 3">
-</div>
+<header>
+  <img src="https://cdn.imgurl.ir/uploads/q149985_IMG_20250813_142213_173.jpg" alt="گادتوشاپ">
+</header>
 
-<div id="year"></div>
+<section>
+  <h1>درباره گادتوشاپ</h1>
+  <p>گادتوشاپ یک اپلیکیشن حرفه‌ای و نوآورانه برای گیمرها و کاربران خدمات دیجیتال است.</p>
+
+  <h2>🌟 امکانات کلیدی اپلیکیشن</h2>
+  <ul>
+    <li>خرید جم سریع</li>
+    <li>بخش سنس‌ساز</li>
+    <li>بخش واسطه‌گری</li>
+    <li>بخش فروشگاه</li>
+    <li>بخش ماین‌کرافت</li>
+    <li>پیشنهادات و مأموریت‌ها</li>
+    <li>پشتیبانی ۲۴/۷</li>
+  </ul>
+
+  <div class="buttons">
+    <a class="myket">⏳ نصب از مایکت (به زودی)</a>
+    <a href="https://cafebazaar.ir/app/GODTOSHOP.COM" class="bazar">📥 نصب از بازار</a>
+  </div>
+
+  <h2>📸 آنچه در آپدیت‌های آینده خواهید دید</h2>
+  <div class="slider-container">
+    <div class="slider">
+      <img src="https://cdn.imgurl.ir/uploads/n439745_Screenshot__.jpg" alt="تصویر 1" class="active">
+      <img src="https://cdn.imgurl.ir/uploads/h7643_Screenshot__.jpg" alt="تصویر 2">
+      <img src="https://cdn.imgurl.ir/uploads/u829209_Screenshot__.jpg" alt="تصویر 3">
+    </div>
+  </div>
+
+  <div class="new-features">
+    <h2>✨ تغییرات نسخه جدید</h2>
+    <ul>
+      <li>بهبود رابط کاربری و طراحی جذاب‌تر</li>
+      <li>اضافه شدن امکانات جدید در بخش سنس‌ساز</li>
+      <li>💳 مشکلات درگاه پرداخت برطرف شد</li>
+      <li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> گادتوشاپ — همه حقوق محفوظ است.
+</footer>
 
 <script>
 // سال جاری
@@ -77,83 +178,56 @@ const slides = document.querySelectorAll('.slider img');
 let current = 0;
 setInterval(()=>{
   slides[current].classList.remove('active');
-  current = (current+1) % slides.length;
+  current = (current+1)%slides.length;
   slides[current].classList.add('active');
-}, 8000);
+},8000);
 
-// پس‌زمینه ستاره‌ها
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let W = canvas.width = window.innerWidth;
-let H = canvas.height = window.innerHeight;
-
-let stars = [];
-for(let i=0; i<600; i++){
-  stars.push({
-    x: Math.random()*W,
-    y: Math.random()*H,
-    r: Math.random()*1.5+0.5,
-    dx: (Math.random()-0.5)*0.6,
-    dy: (Math.random()-0.5)*0.6,
-    glow: Math.random()*0.7+0.3
-  });
+// پس‌زمینه ستاره‌ها و Gradient متحرک
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=window.innerWidth;
+let H=canvas.height=window.innerHeight;
+let stars=[];
+for(let i=0;i<600;i++){
+  stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6, glow:Math.random()*0.7+0.3});
 }
-
-let shootingStars = [];
+let shootingStars=[];
 function createShootingStar(){
-  shootingStars.push({
-    x: Math.random()*W,
-    y: Math.random()*H/2,
-    length: Math.random()*80+50,
-    speed: Math.random()*10+6
-  });
+  shootingStars.push({x:Math.random()*W, y:Math.random()*H/2, length: Math.random()*80+50, speed:Math.random()*10+6});
 }
-setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); }, 1000);
-
+setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); },1000);
 function drawStars(){
   ctx.clearRect(0,0,W,H);
-
-  // ستاره‌ها
   stars.forEach(s=>{
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    let gradient = ctx.createRadialGradient(s.x, s.y, s.r*0.3, s.x, s.y, s.r*4);
-    gradient.addColorStop(0, "rgba(0,255,255,"+s.glow+")");
-    gradient.addColorStop(1, "rgba(0,255,255,0)");
-    ctx.fillStyle = gradient;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = "cyan";
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*4);
+    gradient.addColorStop(0,"rgba(0,255,255,"+s.glow+")");
+    gradient.addColorStop(1,"rgba(0,255,255,0)");
+    ctx.fillStyle=gradient;
     ctx.fill();
-    s.x += s.dx; s.y += s.dy;
-    if(s.x < 0) s.x = W; if(s.x > W) s.x = 0;
-    if(s.y < 0) s.y = H; if(s.y > H) s.y = 0;
+    s.x+=s.dx; s.y+=s.dy;
+    if(s.x<0)s.x=W; if(s.x>W)s.x=0;
+    if(s.y<0)s.y=H; if(s.y>H)s.y=0;
   });
 
-  // shooting star
-  for(let i=shootingStars.length-1; i>=0; i--){
-    let sh = shootingStars[i];
+  shootingStars.forEach((sh,index)=>{
     ctx.beginPath();
-    ctx.moveTo(sh.x, sh.y);
-    ctx.lineTo(sh.x + sh.length, sh.y + sh.length*0.2);
-    ctx.strokeStyle = "rgba(0,255,255,0.8)";
-    ctx.lineWidth = 2;
+    ctx.moveTo(sh.x,sh.y);
+    ctx.lineTo(sh.x+sh.length,sh.y+sh.length*0.2);
+    ctx.strokeStyle="rgba(0,255,255,0.8)";
+    ctx.lineWidth=2;
     ctx.stroke();
     sh.x += sh.speed;
     sh.y += sh.speed*0.2;
-    if(sh.x > W || sh.y > H) shootingStars.splice(i,1);
-  }
+    if(sh.x>W || sh.y>H) shootingStars.splice(index,1);
+  });
 
   requestAnimationFrame(drawStars);
 }
 drawStars();
+window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
 
-// تغییر سایز واکنش‌گرا
-window.addEventListener('resize', ()=>{
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-  stars.forEach(s => { s.x = Math.random()*W; s.y = Math.random()*H; });
-});
 </script>
-
 </body>
 </html>
