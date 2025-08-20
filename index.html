@@ -2,298 +2,74 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>GODTOSHOP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>گادتوشاپ</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-
-    * {
-      box-sizing: border-box;
+    body {
+      font-family: tahoma, Arial, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
-      color: #2c3e50;
-      line-height: 1.7;
-      padding-bottom: 180px;
-      min-height: 100vh;
-      transition: background 0.5s ease;
-    }
-
-    header {
-      background: linear-gradient(145deg, #6a11cb, #2575fc);
-      padding: 40px 20px 25px;
+      background-color: #f9f9f9;
       text-align: center;
-      box-shadow:
-        0 10px 30px rgba(38, 50, 56, 0.5);
-      border-radius: 0 0 40px 40px;
-      color: #f5f6fa;
-      position: relative;
-      overflow: hidden;
     }
-
-    header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%);
-      animation: pulse 10s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
     header img {
-      max-width: 110px;
-      border-radius: 20px;
-      box-shadow:
-        0 8px 25px rgba(255, 255, 255, 0.3),
-        0 0 20px #8e44ad;
-      margin-bottom: 15px;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      position: relative;
-      z-index: 1;
-      cursor: pointer;
-      filter: drop-shadow(0 0 10px #9b59b6);
-    }
-
-    header img:active {
-      transform: scale(1.15) rotate(-8deg);
-      box-shadow:
-        0 0 32px 6px #a29bfe,
-        0 0 45px 12px #8e44ad;
-    }
-
-    header h1 {
-      font-size: 3.4rem;
-      font-weight: 900;
-      letter-spacing: 5px;
-      text-shadow:
-        0 0 15px #a29bfe,
-        0 0 25px #764ba2;
-      position: relative;
-      z-index: 1;
-      user-select: none;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 40px auto 100px;
-      padding: 30px 25px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 30px;
-      box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.12);
-      color: #34495e;
-      transition: box-shadow 0.3s ease;
-    }
-    .container:hover {
-      box-shadow:
-        0 14px 60px rgba(0, 0, 0, 0.18);
-    }
-
-    .section-title {
-      font-size: 2rem;
-      color: #6a11cb;
-      margin: 30px 0 25px;
-      font-weight: 800;
-      text-align: center;
-      text-shadow: 0 0 10px #8e44ad;
-      user-select: none;
-    }
-
-    .video-box {
-      margin-bottom: 35px;
-      text-align: center;
-      border-radius: 20px;
-      padding: 12px;
-      background: linear-gradient(135deg, #f5f7fa, #d6e0f0);
-      box-shadow:
-        inset 0 0 10px rgba(0,0,0,0.05),
-        0 4px 20px rgba(138, 43, 226, 0.15);
-      transition: transform 0.3s ease;
-    }
-    .video-box:hover {
-      transform: scale(1.02);
-    }
-
-    .description {
-      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-      border-left: 8px solid #00bcd4;
-      padding: 25px 22px;
-      margin: 35px 0;
-      border-radius: 25px;
-      font-size: 1.15rem;
-      box-shadow:
-        inset 0 0 12px rgba(0,0,0,0.08);
-      line-height: 1.8;
-      color: #004d40;
-      letter-spacing: 0.03em;
-      transition: background 0.3s ease;
-    }
-    .description:hover {
-      background: linear-gradient(135deg, #b2ebf2, #4dd0e1);
-      box-shadow:
-        inset 0 0 20px rgba(0,0,0,0.12);
-    }
-
-    .download-button {
-      display: inline-block;
-      margin: 35px auto 10px;
-      padding: 18px 48px;
-      font-size: 1.3rem;
-      background: linear-gradient(135deg, #8e44ad, #6a11cb);
-      color: white;
-      border: none;
-      border-radius: 35px;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      font-weight: 700;
-      box-shadow:
-        0 0 12px #a29bfe,
-        0 0 25px #764ba2;
-      transition: box-shadow 0.3s ease, transform 0.25s ease;
-      user-select: none;
-      letter-spacing: 1.3px;
-      text-shadow: 0 0 8px rgba(0,0,0,0.25);
-      filter: drop-shadow(0 0 6px #764ba2);
-      display: block;
-      width: max-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .download-button:hover {
-      box-shadow:
-        0 0 18px #b39ddb,
-        0 0 40px #9a79e0,
-        0 0 60px #b39ddb;
-      transform: scale(1.1);
-    }
-
-    .about, .channel {
-      margin-top: 45px;
-      padding: 30px 28px;
-      background: #f0f4ff;
-      border-radius: 28px;
-      box-shadow:
-        0 10px 35px rgba(130, 86, 214, 0.1);
-      transition: background 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .about:hover, .channel:hover {
-      background: #e5ebff;
-      box-shadow:
-        0 15px 50px rgba(130, 86, 214, 0.3);
-    }
-
-    .about p, .channel p {
-      font-size: 1.1rem;
-      color: #2c3e50;
-      line-height: 1.75;
-      letter-spacing: 0.01em;
-      user-select: text;
-    }
-
-    .channel a {
-      color: #6a11cb;
-      text-decoration: none;
-      font-weight: 700;
-      transition: color 0.3s;
-      user-select: none;
-    }
-
-    .channel a:hover {
-      color: #8e44ad;
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background-color: #6a11cb;
-      color: white;
-      position: fixed;
       width: 100%;
-      bottom: 0;
-      font-size: 1rem;
-      border-radius: 25px 25px 0 0;
-      box-shadow: 0 -4px 15px rgba(102, 43, 164, 0.7);
-      user-select: none;
-      z-index: 1000;
-      letter-spacing: 0.05em;
+      max-height: 400px;
+      object-fit: cover;
     }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.4rem;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .download-button {
-        padding: 16px 38px;
-        font-size: 1.1rem;
-      }
-      .container {
-        padding: 20px 18px;
-        margin: 20px 15px 120px;
-      }
+    section {
+      padding: 30px 20px;
+    }
+    h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 25px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background-color: #0078ff;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background-color: #005fcc;
     }
   </style>
 </head>
 <body>
+  <!-- عکس بالا -->
+  <header>
+    <img src="https://cdn.imgurl.ir/uploads/q149985_IMG_20250813_142213_173.jpg" alt="گادتوشاپ">
+  </header>
 
-<header>
-  <img src="https://s6.uupload.ir/files/img_20250525_192611_224_87w9.jpg" alt="لوگو GODTOSHOP" />
-  <h1>GODTOSHOP</h1>
-</header>
+  <!-- بخش درباره -->
+  <section>
+    <h2>درباره‌ی گادتوشاپ</h2>
+    <p>
+      اینجا متن توضیحات درباره‌ی گادتوشاپ قرار می‌گیره.  
+      (هر متنی که آماده کردی می‌تونی جایگزین کنی)
+    </p>
 
-<div class="container">
-
-  <div class="video-box">
-    <h2 class="section-title">نمایه‌ای از برنامه</h2>
-    <div id="37587281083">
-      <script type="text/JavaScript" src="https://www.aparat.com/embed/wyg15u8?data[rnddiv]=37587281083&data[responsive]=yes"></script>
+    <!-- دکمه‌ها -->
+    <div class="buttons">
+      <a href="#" class="btn">📥 نصب برنامه از مایکت</a>
+      <a href="#" class="btn">📥 نصب برنامه از بازار</a>
     </div>
-  </div>
-
-  <div class="description">
-    این برنامه برای فروش انواع محصولات دیجیتال از جمله جم فری‌فایر، اکانت‌های بازی، کدهای اختصاصی و خدمات ویژه طراحی شده است. با رابط کاربری ساده و جذاب، به راحتی می‌توانید محصول مورد نظر را انتخاب و خریداری کنید.
-  </div>
-
-  <a href="app.apk" class="download-button">📥 دانلود برنامه</a>
-
-  <div class="about">
-    <h2 class="section-title">درباره ما</h2>
-    <p>GODTOSHOP یک فروشگاه آنلاین برای خدمات دیجیتال است که با تمرکز بر کیفیت، امنیت و پشتیبانی، تلاش می‌کند تجربه‌ای سریع و قابل‌اعتماد برای کاربران فراهم کند.</p>
-  </div>
-
-  <div class="channel">
-    <h2 class="section-title">کانال‌های ما</h2>
-    <p>📢 <a href="https://t.me/GODTOSHOP" target="_blank" rel="noopener noreferrer">کانال تلگرام GODTOSHOP</a></p>
-  </div>
-
-</div>
-
-<footer>
-  © ۲۰۲۵ - طراحی شده برای GODTOSHOP
-</footer>
-
+  </section>
 </body>
 </html>
