@@ -1,75 +1,117 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>گادتوشاپ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>گادتوشاپ | اپلیکیشن گیمینگ</title>
   <style>
     body {
-      font-family: tahoma, Arial, sans-serif;
+      font-family: tahoma, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f9f9f9;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.8;
+    }
+    header {
       text-align: center;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     header img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
+      max-width: 100%;
+      border-radius: 12px;
     }
     section {
-      padding: 30px 20px;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
     }
-    h2 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: #333;
+    h1, h2 {
+      text-align: center;
+      color: #222;
     }
     p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 25px;
+      margin: 15px 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      text-align: center;
+      margin-top: 30px;
     }
-    .btn {
-      background-color: #0078ff;
-      color: white;
-      padding: 12px 20px;
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
       border-radius: 8px;
       text-decoration: none;
-      font-size: 16px;
-      transition: background 0.3s;
+      color: #fff;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    .btn:hover {
-      background-color: #005fcc;
+    .myket { background: #00c896; }
+    .bazar { background: #2e7d32; }
+    .buttons a:hover { opacity: 0.85; }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      margin-top: 50px;
+      color: #555;
+      font-size: 14px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
     }
   </style>
 </head>
 <body>
-  <!-- عکس بالا -->
+
   <header>
     <img src="https://cdn.imgurl.ir/uploads/q149985_IMG_20250813_142213_173.jpg" alt="گادتوشاپ">
   </header>
 
-  <!-- بخش درباره -->
   <section>
-    <h2>درباره‌ی گادتوشاپ</h2>
+    <h1>درباره گادتوشاپ</h1>
     <p>
-      اینجا متن توضیحات درباره‌ی گادتوشاپ قرار می‌گیره.  
-      (هر متنی که آماده کردی می‌تونی جایگزین کنی)
+      گادتوشاپ یک اپلیکیشن مدرن و قابل اعتماد است که با تمرکز بر نیازهای گیمرها طراحی شده.
+      این اپ تجربه‌ای امن، سریع و لذت‌بخش برای خرید، فروش و مدیریت خدمات دیجیتال در اختیار شما قرار می‌دهد.
     </p>
 
-    <!-- دکمه‌ها -->
+    <h2>🌟 امکانات اپلیکیشن گادتوشاپ</h2>
+    <ul>
+      <li>🧩 خرید آنی جم برای بازی‌های محبوب با پرداخت مستقیم و امن</li>
+      <li>🛠️ بخش سنس‌ساز: ساخت و مدیریت سنس‌های حرفه‌ای با امتیازهای خریداری‌شده</li>
+      <li>🛡️ بخش واسطه‌گری: انجام معاملات امن با استفاده از واسطه‌های معتبر</li>
+      <li>🛒 بخش فروشگاه: خرید محصولات دیجیتال مانند مستر کارت، پنل Alltupup و سایر خدمات</li>
+      <li>⛏️ بخش ماین‌کرافت: خرید اکانت‌های پرمیوم و آیتم‌های اختصاصی</li>
+      <li>🎯 بخش پیشنهادات: انجام مأموریت‌ها و دریافت جوایز و امتیازات با ارسال به پشتیبانی</li>
+      <li>🤝 پشتیبانی آنلاین ۲۴/۷ برای راهنمایی و حل مشکلات کاربران</li>
+      <li>💡 سایر خدمات و امکانات ویژه در کانال‌های تلگرام و روبیکا</li>
+    </ul>
+
     <div class="buttons">
-      <a href="#" class="btn">📥 نصب برنامه از مایکت</a>
-      <a href="#" class="btn">📥 نصب برنامه از بازار</a>
+      <a href="#" class="myket">📥 نصب از مایکت</a>
+      <a href="#" class="bazar">📥 نصب از بازار</a>
     </div>
   </section>
+
+  <footer>
+    © <span id="year"></span> گادتوشاپ — همه حقوق محفوظ است.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
