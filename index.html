@@ -71,7 +71,7 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
   border-radius: 25px;
   margin: 40px 0;
   width: 100%;
-  min-height: 400px; /* ارتفاع حداقل */
+  min-height: 400px; /* ارتفاع کافی */
 }
 
 .slider {
@@ -162,9 +162,9 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
   <h2>📸 آنچه در آپدیت‌های آینده خواهید دید</h2>
   <div class="slider-container">
     <div class="slider">
-<img src="https://cdn.imgurl.ir/uploads/j71021_Screenshot__.jpg" alt="تصویر 1" class="active"> alt="تصویر 1" class="active">
-<img src="https://cdn.imgurl.ir/uploads/v010392_Screenshot__.jpg" alt="تصویر 2">
-<img src="https://cdn.imgurl.ir/uploads/y94659_Screenshot__.jpg" alt="تصویر 3">
+      <img src="https://cdn.imgurl.ir/uploads/j71021_Screenshot__.jpg" alt="تصویر 1" class="active">
+      <img src="https://cdn.imgurl.ir/uploads/v010392_Screenshot__.jpg" alt="تصویر 2">
+      <img src="https://cdn.imgurl.ir/uploads/y94659_Screenshot__.jpg" alt="تصویر 3">
     </div>
   </div>
 
@@ -173,7 +173,7 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
     <ul>
       <li>بهبود رابط کاربری و طراحی جذاب‌تر</li>
       <li>اضافه شدن امکانات جدید در بخش سنس‌ساز</li>
-      <li>مشکلات درگاه پرداخت برطرف شد</li>
+      <li>💳 مشکلات درگاه پرداخت برطرف شد</li>
       <li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر</li>
     </ul>
   </div>
@@ -188,11 +188,11 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // اسلایدر Fade حرفه‌ای
-const slides = document.querySelectorAll('.slider img');
-let current = 0;
-
 window.addEventListener('load', () => {
+  const slides = document.querySelectorAll('.slider img');
+  let current = 0;
   slides[current].classList.add('active');
+
   setInterval(() => {
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
@@ -200,52 +200,63 @@ window.addEventListener('load', () => {
   }, 5000);
 });
 
-// پس‌زمینه ستاره‌ها و Gradient متحرک
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-let W=canvas.width=window.innerWidth;
-let H=canvas.height=window.innerHeight;
-let stars=[];
-for(let i=0;i<600;i++){
-  stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6, glow:Math.random()*0.7+0.3});
+// پس‌زمینه ستاره‌ها و شوتینگ‌استارها
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+
+let stars = [];
+for (let i = 0; i < 600; i++) {
+  stars.push({x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.6, dy: (Math.random()-0.5)*0.6, glow: Math.random()*0.7+0.3});
 }
-let shootingStars=[];
-function createShootingStar(){
-  shootingStars.push({x:Math.random()*W, y:Math.random()*H/2, length: Math.random()*80+50, speed:Math.random()*10+6});
+
+let shootingStars = [];
+function createShootingStar() {
+  shootingStars.push({x: Math.random()*W, y: Math.random()*H/2, length: Math.random()*80+50, speed: Math.random()*10+6});
 }
-setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); },1000);
-function drawStars(){
-  ctx.clearRect(0,0,W,H);
-  stars.forEach(s=>{
+
+setInterval(() => { if (Math.random() < 0.15) createShootingStar(); }, 1000);
+
+function drawStars() {
+  ctx.clearRect(0, 0, W, H);
+
+  stars.forEach(s => {
     ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*4);
-    gradient.addColorStop(0,"rgba(0,255,255,"+s.glow+")");
-    gradient.addColorStop(1,"rgba(0,255,255,0)");
-    ctx.fillStyle=gradient;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    let gradient = ctx.createRadialGradient(s.x, s.y, s.r*0.3, s.x, s.y, s.r*4);
+    gradient.addColorStop(0, "rgba(0,255,255," + s.glow + ")");
+    gradient.addColorStop(1, "rgba(0,255,255,0)");
+    ctx.fillStyle = gradient;
     ctx.fill();
-    s.x+=s.dx; s.y+=s.dy;
-    if(s.x<0)s.x=W; if(s.x>W)s.x=0;
-    if(s.y<0)s.y=H; if(s.y>H)s.y=0;
+    s.x += s.dx; s.y += s.dy;
+    if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
+    if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
   });
 
-  shootingStars.forEach((sh,index)=>{
-    ctx.beginPath();
-    ctx.moveTo(sh.x,sh.y);
-    ctx.lineTo(sh.x+sh.length,sh.y+sh.length*0.2);
-    ctx.strokeStyle="rgba(0,255,255,0.8)";
-    ctx.lineWidth=2;
-    ctx.stroke();
+  shootingStars = shootingStars.filter(sh => {
     sh.x += sh.speed;
     sh.y += sh.speed*0.2;
-    if(sh.x>W || sh.y>H) shootingStars.splice(index,1);
+    if (sh.x > W || sh.y > H) return false;
+    ctx.beginPath();
+    ctx.moveTo(sh.x, sh.y);
+    ctx.lineTo(sh.x + sh.length, sh.y + sh.length*0.2);
+    ctx.strokeStyle = "rgba(0,255,255,0.8)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    return true;
   });
 
   requestAnimationFrame(drawStars);
 }
-drawStars();
-window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
-</script>
 
+drawStars();
+
+window.addEventListener('resize', () => {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  stars.forEach(s => { if(s.x>W)s.x=Math.random()*W; if(s.y>H)s.y=Math.random()*H; });
+});
+</script>
 </body>
 </html>
