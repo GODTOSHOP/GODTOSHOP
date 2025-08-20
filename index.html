@@ -65,23 +65,37 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
 @keyframes starPulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.4);} }
 
 /* اسلایدر Fade حرفه‌ای */
-.slider-container { position:relative; overflow:hidden; border-radius:25px; margin:40px 0; width:100%; height:auto; }
-.slider { position:relative; width:100%; height:auto; }
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+  margin: 40px 0;
+  width: 100%;
+  min-height: 400px; /* ارتفاع حداقل */
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .slider img {
-  position:absolute;
-  top:0; left:0;
-  width:100%;
-  height:auto;
-  border-radius:25px;
-  object-fit:cover;
-  opacity:0;
-  transition: opacity 1.5s ease-in-out, transform 1.5s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
   box-shadow: 0 0 50px rgba(0,255,255,0.5);
   filter: drop-shadow(0 0 15px #0ff);
 }
+
 .slider img.active {
-  opacity:1;
-  transform: scale(1.02);
+  opacity: 1;
 }
 
 /* دکمه‌ها نئونی */
@@ -176,11 +190,15 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // اسلایدر Fade حرفه‌ای
 const slides = document.querySelectorAll('.slider img');
 let current = 0;
-setInterval(()=>{
-  slides[current].classList.remove('active');
-  current = (current+1)%slides.length;
+
+window.addEventListener('load', () => {
   slides[current].classList.add('active');
-},8000);
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+});
 
 // پس‌زمینه ستاره‌ها و Gradient متحرک
 const canvas=document.getElementById('stars');
@@ -227,7 +245,7 @@ function drawStars(){
 }
 drawStars();
 window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
-
 </script>
+
 </body>
 </html>
