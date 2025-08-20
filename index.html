@@ -71,7 +71,7 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
   border-radius: 25px;
   margin: 40px 0;
   width: 100%;
-  min-height: 400px; /* ارتفاع کافی */
+  height: 400px;
 }
 
 .slider {
@@ -90,8 +90,6 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
   object-fit: cover;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
-  box-shadow: 0 0 50px rgba(0,255,255,0.5);
-  filter: drop-shadow(0 0 15px #0ff);
 }
 
 .slider img.active {
@@ -118,8 +116,8 @@ ul li::before { content: "⭐"; margin-left:10px; font-size:1.2rem; animation: s
 .myket { background: linear-gradient(45deg,#ff1744,#ff5252); cursor:default; }
 
 /* تغییرات نسخه جدید */
-.new-features { background: rgba(255,255,255,0.05); padding:25px; border-radius:20px; margin-top:45px; backdrop-filter: blur(6px); box-shadow:0 0 35px rgba(0,255,255,0.1); }
-.new-features ul li { margin-bottom:14px; font-size:1.05rem; color:#ddd; display:flex; align-items:center; filter: drop-shadow(0 0 5px #0ff);}
+.new-features { background: rgba(255,255,255,0.05); padding:25px; border-radius:20px; margin-top:45px; backdrop-filter: blur(6px); box-shadow:0 0 35px rgba(0,0,0,0.2); }
+.new-features ul li { margin-bottom:14px; font-size:1.05rem; color:#ddd; display:flex; align-items:center; }
 .new-features li::before { content:"✨"; margin-left:10px; font-size:1.2rem; animation: sparkle 2s infinite; }
 @keyframes sparkle { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.4);} }
 
@@ -187,7 +185,7 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
 // سال جاری
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// اسلایدر Fade حرفه‌ای
+// اسلایدر Fade
 window.addEventListener('load', () => {
   const slides = document.querySelectorAll('.slider img');
   let current = 0;
@@ -200,63 +198,52 @@ window.addEventListener('load', () => {
   }, 5000);
 });
 
-// پس‌زمینه ستاره‌ها و شوتینگ‌استارها
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let W = canvas.width = window.innerWidth;
-let H = canvas.height = window.innerHeight;
-
-let stars = [];
-for (let i = 0; i < 600; i++) {
-  stars.push({x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.6, dy: (Math.random()-0.5)*0.6, glow: Math.random()*0.7+0.3});
+// ستاره‌ها
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=window.innerWidth;
+let H=canvas.height=window.innerHeight;
+let stars=[];
+for(let i=0;i<600;i++){
+  stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6, glow:Math.random()*0.7+0.3});
 }
-
-let shootingStars = [];
-function createShootingStar() {
-  shootingStars.push({x: Math.random()*W, y: Math.random()*H/2, length: Math.random()*80+50, speed: Math.random()*10+6});
+let shootingStars=[];
+function createShootingStar(){
+  shootingStars.push({x:Math.random()*W, y:Math.random()*H/2, length: Math.random()*80+50, speed:Math.random()*10+6});
 }
-
-setInterval(() => { if (Math.random() < 0.15) createShootingStar(); }, 1000);
-
-function drawStars() {
-  ctx.clearRect(0, 0, W, H);
-
-  stars.forEach(s => {
+setInterval(()=>{ if(Math.random()<0.05) createShootingStar(); },1000);
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    let gradient = ctx.createRadialGradient(s.x, s.y, s.r*0.3, s.x, s.y, s.r*4);
-    gradient.addColorStop(0, "rgba(0,255,255," + s.glow + ")");
-    gradient.addColorStop(1, "rgba(0,255,255,0)");
-    ctx.fillStyle = gradient;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*4);
+    gradient.addColorStop(0,"rgba(0,255,255,"+s.glow+")");
+    gradient.addColorStop(1,"rgba(0,255,255,0)");
+    ctx.fillStyle=gradient;
     ctx.fill();
-    s.x += s.dx; s.y += s.dy;
-    if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
-    if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
+    s.x+=s.dx; s.y+=s.dy;
+    if(s.x<0)s.x=W; if(s.x>W)s.x=0;
+    if(s.y<0)s.y=H; if(s.y>H)s.y=0;
   });
 
-  shootingStars = shootingStars.filter(sh => {
+  shootingStars.forEach((sh,index)=>{
+    ctx.beginPath();
+    ctx.moveTo(sh.x,sh.y);
+    ctx.lineTo(sh.x+sh.length,sh.y+sh.length*0.2);
+    ctx.strokeStyle="rgba(0,255,255,0.8)";
+    ctx.lineWidth=2;
+    ctx.stroke();
     sh.x += sh.speed;
     sh.y += sh.speed*0.2;
-    if (sh.x > W || sh.y > H) return false;
-    ctx.beginPath();
-    ctx.moveTo(sh.x, sh.y);
-    ctx.lineTo(sh.x + sh.length, sh.y + sh.length*0.2);
-    ctx.strokeStyle = "rgba(0,255,255,0.8)";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    return true;
+    if(sh.x>W || sh.y>H) shootingStars.splice(index,1);
   });
 
   requestAnimationFrame(drawStars);
 }
-
 drawStars();
+window.addEventListener('resize',()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
 
-window.addEventListener('resize', () => {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-  stars.forEach(s => { if(s.x>W)s.x=Math.random()*W; if(s.y>H)s.y=Math.random()*H; });
-});
 </script>
 </body>
 </html>
