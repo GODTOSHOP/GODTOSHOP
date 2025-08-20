@@ -1,97 +1,164 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فروشگاه من</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>وب‌سایت شما</title>
+  <meta name="description" content="یک استارتر تمیز برای ساخت وب‌سایت فارسی با HTML و CSS" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      overflow: hidden;
-      font-family: sans-serif;
-      color: white;
+    :root{
+      --bg: #0f172a;           /* slate-900 */
+      --surface: #111827;      /* gray-900 */
+      --card: #0b1220;         /* custom dark */
+      --primary: #06b6d4;      /* cyan-500 */
+      --primary-700:#0e7490;   /* cyan-700 */
+      --text: #e5e7eb;         /* gray-200 */
+      --muted: #9ca3af;        /* gray-400 */
+      --ring: rgba(6,182,212,.35);
+      --radius: 16px;
+      --container: 1100px;
     }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "IRANSans", "Vazirmatn", Tahoma, Arial; 
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(6,182,212,.08), transparent 60%), var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:var(--primary); text-decoration:none}
+    a:hover{color:#67e8f9}
+    .container{width: min(100% - 2rem, var(--container)); margin-inline:auto}
+    header{
+      position: sticky; top:0; z-index:10; backdrop-filter: saturate(140%) blur(8px);
+      background: linear-gradient(to bottom, rgba(15,23,42,.9), rgba(15,23,42,.5));
+      border-bottom: 1px solid rgba(148,163,184,.15);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding: .9rem 0}
+    .brand{display:flex; gap:.6rem; align-items:center; font-weight:700}
+    .brand .logo{width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg, var(--primary), #3b82f6); display:grid; place-items:center; box-shadow:0 10px 30px rgba(6,182,212,.25)}
+    .brand b{letter-spacing:.4px}
+    .nav a{color:var(--text); opacity:.9}
+    .nav ul{display:flex; gap:1rem; list-style:none; margin:0; padding:0}
+    .btn{display:inline-block; padding:.65rem 1rem; border-radius:999px; background:var(--primary); color:#042029; font-weight:700; box-shadow:0 10px 24px var(--ring)}
+    .btn:hover{background:#22d3ee}.hero{padding: 6rem 0 3rem; position:relative}
+.hero h1{font-size: clamp(28px, 4vw, 40px); margin:0 0 .7rem; line-height:1.2}
+.hero p{color:var(--muted); margin:0 0 1.2rem}
+.hero .actions{display:flex; gap:.75rem; flex-wrap:wrap}
 
-    /* ستاره‌ها */
-    .stars {
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      box-shadow: 
-        100px 200px white,
-        300px 600px white,
-        700px 300px white,
-        900px 100px white,
-        400px 500px white,
-        1100px 700px white,
-        600px 800px white,
-        1200px 400px white,
-        1400px 600px white,
-        1600px 200px white;
-      animation: twinkle 2s infinite alternate;
-    }
+.grid{display:grid; gap:1rem}
+@media (min-width: 768px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
+.card{background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 45%), var(--card); border:1px solid rgba(148,163,184,.12); padding:1rem; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(2,6,23,.35)}
+.card h3{margin:.2rem 0 .3rem; font-size:1.05rem}
+.card p{margin:0; color:var(--muted)}
 
-    .stars::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 2px;
-      background: transparent;
-      box-shadow: 
-        200px 100px white,
-        500px 700px white,
-        800px 200px white,
-        1000px 500px white,
-        1300px 300px white,
-        1500px 600px white;
-      animation: twinkle 3s infinite alternate;
-    }
+.section{padding: 2.5rem 0}
+.section h2{font-size: clamp(22px, 3vw, 28px); margin:0 0 .8rem}
+.section .lead{color:var(--muted); margin:0 0 1.5rem}
 
-    @keyframes twinkle {
-      from { opacity: 0.3; }
-      to   { opacity: 1; }
-    }
+.footer{padding:2rem 0; color:#cbd5e1; border-top:1px solid rgba(148,163,184,.15)}
 
-    header {
-      position: relative;
-      z-index: 10;
-      background: rgba(0,0,0,0.6);
-      padding: 15px;
-      text-align: center;
-    }
+/* utils */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.kbd{font:inherit; background:#0b1220; border:1px solid rgba(148,163,184,.25); border-bottom-width:2px; padding:.08rem .4rem; border-radius:6px}
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .hero {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 100px 20px;
-    }
-
-    .hero h2 {
-      font-size: 40px;
-    }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-
   <header>
-    <h1>فروشگاه من</h1>
-  </header>
+    <nav class="container nav" aria-label="ناوبری اصلی">
+      <a class="brand" href="#">
+        <span class="logo" aria-hidden="true">⚡</span>
+        <b>برند شما</b>
+        <span class="sr-only">رفتن به صفحه اصلی</span>
+      </a>
+      <ul>
+        <li><a href="#features">امکانات</a></li>
+        <li><a href="#pricing">تعرفه‌ها</a></li>
+        <li><a href="#contact">تماس</a></li>
+      </ul>
+    </nav>
+  </header>  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>یک وب‌سایت مدرن و واکنش‌گرا، با <span style="color:var(--primary)">HTML</span> و <span style="color:var(--primary)">CSS</span></h1>
+        <p>این استارتر مینیمال، همه چیزهایی را که برای شروع لازم دارید فراهم می‌کند: ساختار معنایی، طراحی تیره، و کامپوننت‌های پایه.</p>
+        <div class="actions">
+          <a class="btn" href="#features">شروع سریع</a>
+          <a href="#" title="مستندات">مستندات کوتاه</a>
+        </div>
+      </div>
+    </section><section id="features" class="section">
+  <div class="container">
+    <h2>امکانات اصلی</h2>
+    <p class="lead">ماژولار، قابل توسعه، و مناسب زبان فارسی (RTL).</p>
+    <div class="grid grid-3">
+      <article class="card">
+        <h3>چیدمان واکنش‌گرا</h3>
+        <p>گرید ساده با سه ستون در دسکتاپ و یک ستون در موبایل.</p>
+      </article>
+      <article class="card">
+        <h3>تایپوگرافی فارسی</h3>
+        <p>پشتیبانی از فونت‌های سیستم و خانواده‌های محبوب فارسی.</p>
+      </article>
+      <article class="card">
+        <h3>طراحی تاریک</h3>
+        <p>پالت رنگ مدرن با سایه‌های نرم و لبه‌های گرد.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <section class="hero">
-    <h2>به فروشگاه ستاره‌ای ما خوش آمدید</h2>
-    <p>اینجا می‌تونی بهترین محصولات رو پیدا کنی 🌟</p>
-  </section>
-</body>
+<section id="pricing" class="section">
+  <div class="container">
+    <h2>تعرفه‌ها</h2>
+    <p class="lead">قیمت‌گذاری نمونه؛ می‌توانید مقادیر را مطابق پروژه خودتان تغییر دهید.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>پلن پایه</h3>
+        <p>مناسب صفحات ساده لندینگ.</p>
+        <p><b>۱٬۲۰۰٬۰۰۰ تومان</b></p>
+      </div>
+      <div class="card">
+        <h3>پلن حرفه‌ای</h3>
+        <p>به‌همراه صفحات بیشتر و فرم تماس.</p>
+        <p><b>۳٬۵۰۰٬۰۰۰ تومان</b></p>
+      </div>
+      <div class="card">
+        <h3>پلن سازمانی</h3>
+        <p>سفارشی‌سازی کامل و پشتیبانی.</p>
+        <p><b>— تماس بگیرید</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container">
+    <h2>تماس با ما</h2>
+    <p class="lead">برای شروع همکاری، فرم زیر را پر کنید.</p>
+    <form class="card" onsubmit="event.preventDefault(); alert('فرم نمونه است. اینجا می‌توانید اتصال به بک‌اند اضافه کنید.');">
+      <label>نام<br>
+        <input required type="text" name="name" placeholder="نام شما" style="width:100%; padding:.7rem .8rem; border-radius:10px; border:1px solid rgba(148,163,184,.25); background:#0b1220; color:var(--text); outline:none" />
+      </label>
+      <br>
+      <label>ایمیل<br>
+        <input required type="email" name="email" placeholder="example@mail.com" style="width:100%; padding:.7rem .8rem; border-radius:10px; border:1px solid rgba(148,163,184,.25); background:#0b1220; color:var(--text); outline:none" />
+      </label>
+      <br>
+      <label>پیام<br>
+        <textarea required name="message" rows="4" placeholder="سلام!…" style="width:100%; padding:.7rem .8rem; border-radius:10px; border:1px solid rgba(148,163,184,.25); background:#0b1220; color:var(--text); outline:none"></textarea>
+      </label>
+      <br>
+      <button class="btn" type="submit">ارسال پیام</button>
+    </form>
+  </div>
+</section>
+
+  </main>  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> برند شما — همه حقوق محفوظ است.</small>
+    </div>
+  </footer>  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script></body>
 </html>
