@@ -1,113 +1,118 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>انیمیشن Minecraft حرفه‌ای</title>
-<style>
-  body { margin:0; overflow:hidden; background:#000; }
-  canvas { display:block; }
-</style>
-</head>
-<body>
-<canvas id="canvas"></canvas>
-
+<canvas id="rocket"></canvas>
 <script>
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// کانواس و تنظیمات موشک
+const rocketCanvas = document.getElementById('rocket');
+const rCtx = rocketCanvas.getContext('2d');
+rocketCanvas.width = window.innerWidth;
+rocketCanvas.height = window.innerHeight;
 
-const W = canvas.width;
-const H = canvas.height;
+let rocket = {
+  x: -50,
+  y: 50,
+  targetX: window.innerWidth/2,
+  targetY: window.innerHeight - 150,
+  size: 40,
+  speed: 4,
+  reached: false
+};
 
-// زمین مکعبی ماین‌کرافتی
-const land = { x: 50, y: 50, size: 80 };
+// افکت Trail
+let trail = [];
 
-// استیو روی موشک
-const steve = { x: W - 100, y: H - 100, size: 40, color: '#FFD700' };
+function drawRocket() {
+  rCtx.clearRect(0,0,rocketCanvas.width,rocketCanvas.height);
 
-// انفجار بلوک‌ها
-let particles = [];
-let explosionDone = false;
-let animationDone = false;
+  // اضافه کردن موقعیت فعلی به Trail
+  trail.push({x: rocket.x, y: rocket.y, alpha:1});
+  trail = trail.map(t=>({x:t.x, y:t.y, alpha: t.alpha-0.02})).filter(t=>t.alpha>0);
 
-// رسم زمین مکعبی
-function drawLand() {
-  ctx.fillStyle = "#55AA55";
-  ctx.fillRect(land.x, land.y, land.size, land.size);
-  // اضافه کردن خطوط مکعبی برای حالت Minecraft
-  ctx.strokeStyle = "#448844";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(land.x, land.y, land.size, land.size);
+  // کشیدن Trail
+  trail.forEach(t=>{
+    rCtx.beginPath();
+    rCtx.arc(t.x, t.y, rocket.size/6, 0, Math.PI*2);
+    rCtx.fillStyle = `rgba(0,255,255,${t.alpha})`;
+    rCtx.fill();
+  });
+
+  // کشیدن موشک (مثل مثلث کوچک)
+  rCtx.beginPath();
+  rCtx.moveTo(rocket.x, rocket.y);
+  rCtx.lineTo(rocket.x-rocket.size/2, rocket.y+rocket.size);
+  rCtx.lineTo(rocket.x+rocket.size/2, rocket.y+rocket.size);
+  rCtx.closePath();
+  rCtx.fillStyle = "#ff1744";
+  rCtx.fill();
+  rCtx.strokeStyle = "#0ff";
+  rCtx.stroke();
+
+  // حرکت موشک به سمت هدف
+  if(!rocket.reached){
+    let dx = rocket.targetX - rocket.x;
+    let dy = rocket.targetY - rocket.y;
+    let dist = Math.sqrt(dx*dx + dy*dy);
+    if(dist < 5){
+      rocket.reached = true;
+      createExplosion(rocket.x, rocket.y);
+    } else {
+      rocket.x += dx/ dist * rocket.speed;
+      rocket.y += dy/ dist * rocket.speed;
+    }
+  }
+
+  requestAnimationFrame(drawRocket);
 }
 
-// حرکت و رسم استیو
-function drawSteve() {
-  ctx.fillStyle = steve.color;
-  ctx.fillRect(steve.x, steve.y, steve.size, steve.size);
-}
-
-// ایجاد انفجار مکعبی
-function triggerExplosion(){
-  explosionDone = true;
-  for(let i=0;i<35;i++){
-    particles.push({
-      x: land.x + land.size/2,
-      y: land.y + land.size/2,
-      size: 10 + Math.random()*10,
-      vx: (Math.random()-0.5)*12,
-      vy: (Math.random()-1.5)*12,
-      color: `hsl(${Math.random()*50+50}, 80%, 50%)`
+// افکت انفجار
+let explosions = [];
+function createExplosion(x,y){
+  for(let i=0;i<20;i++){
+    explosions.push({
+      x, y,
+      dx: (Math.random()-0.5)*6,
+      dy: (Math.random()-0.5)*6,
+      size: Math.random()*6+4,
+      alpha:1
     });
   }
-  // پایان انیمیشن بعد از 2.5 ثانیه
-  setTimeout(()=>{ animationDone = true; },2500);
 }
 
-// رسم انفجار
 function drawExplosion(){
-  particles.forEach(p=>{
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.3; // جاذبه
-    ctx.fillStyle = p.color;
-    ctx.fillRect(p.x, p.y, p.size, p.size);
+  explosions.forEach((e,i)=>{
+    rCtx.beginPath();
+    rCtx.arc(e.x, e.y, e.size,0,Math.PI*2);
+    rCtx.fillStyle = `rgba(255,255,255,${e.alpha})`;
+    rCtx.fill();
+    e.x += e.dx;
+    e.y += e.dy;
+    e.alpha -=0.03;
+    if(e.alpha<=0) explosions.splice(i,1);
   });
 }
 
-// انیمیشن اصلی
-function animate() {
-  if(animationDone) return;
-
-  ctx.clearRect(0,0,W,H);
-
-  drawLand();
-
-  if(!explosionDone){
-    // حرکت موشک
-    steve.x -= 6;
-    steve.y -= 4;
-    drawSteve();
-
-    // رسیدن موشک
-    if(steve.x <= land.x + land.size/2 && steve.y <= land.y + land.size/2){
-      triggerExplosion();
-    }
-  } else {
-    drawExplosion();
-  }
-
-  requestAnimationFrame(animate);
+// ترکیب موشک و انفجار
+function animateRocket(){
+  drawRocket();
+  drawExplosion();
+  requestAnimationFrame(animateRocket);
 }
 
-animate();
+animateRocket();
 
-// ریسایز
-window.addEventListener('resize',()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// ریست موشک بعد از انفجار
+setInterval(()=>{
+  if(rocket.reached){
+    rocket.x = -50;
+    rocket.y = 50;
+    rocket.reached = false;
+    trail = [];
+  }
+}, 8000);
+
+// resize
+window.addEventListener('resize', ()=>{
+  rocketCanvas.width = window.innerWidth;
+  rocketCanvas.height = window.innerHeight;
+  rocket.targetX = window.innerWidth/2;
+  rocket.targetY = window.innerHeight - 150;
 });
 </script>
-</body>
-</html>
