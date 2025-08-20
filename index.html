@@ -5,148 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>گادتوشاپ | اپلیکیشن حرفه‌ای گیمینگ</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
 
-  /* تنظیمات پایه */
-  body { 
-    font-family: 'Vazirmatn', Tahoma, sans-serif; 
-    margin: 0; padding: 0; 
-    background: linear-gradient(135deg, #f5f7fa, #e0eafc); 
-    color: #333; line-height: 1.8; 
-    scroll-behavior: smooth;
-  }
+/* پایه و پس‌زمینه */
+body {
+  margin:0; padding:0;
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+canvas#stars { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-  header { 
-    text-align: center; 
-    background: linear-gradient(90deg, #4facfe, #00f2fe); 
-    padding: 25px; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-  header img { 
-    max-width: 180px; 
-    border-radius: 20px; 
-    transition: transform 0.5s;
-  }
-  header img:hover { transform: rotate(-5deg) scale(1.05); }
+/* هدر */
+header {
+  text-align:center;
+  padding:25px;
+}
+header img {
+  max-width:180px;
+  border-radius:20px;
+  transition: transform 0.5s;
+}
+header img:hover { transform: rotate(-5deg) scale(1.05); }
 
-  section { 
-    padding: 40px; 
-    max-width: 1000px; 
-    margin: auto; 
-  }
-  h1, h2 { 
-    text-align: center; 
-    color: #222; 
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.1); 
-  }
-  p { margin: 20px 0; font-size: 1.1rem; }
-  ul { list-style: none; padding: 0; }
-  ul li { 
-    background: linear-gradient(145deg, #ffffff, #f0f0f3); 
-    margin: 12px 0; 
-    padding: 15px 20px; 
-    border-radius: 15px; 
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.05), -5px -5px 15px rgba(255,255,255,0.7); 
-    transition: transform 0.3s, box-shadow 0.3s; 
-  }
-  ul li:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.1), -10px -10px 20px rgba(255,255,255,0.8); 
-  }
+/* محتوا */
+section {
+  padding:40px;
+  max-width:1000px;
+  margin:auto;
+}
+h1,h2 { text-align:center; color:#fff; text-shadow: 1px 1px 8px rgba(0,0,0,0.7);}
+p { margin:20px 0; font-size:1.1rem; color:#ddd; }
+ul { list-style:none; padding:0; }
+ul li {
+  background: rgba(255,255,255,0.05);
+  margin:12px 0;
+  padding:15px 20px;
+  border-radius:15px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+ul li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255,255,255,0.2);
+}
 
-  /* اسلایدر حرفه‌ای */
-  .slider-container { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 20px; 
-    margin: 30px 0; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
-  .slider { 
-    display: flex; 
-    transition: transform 0.8s cubic-bezier(0.77,0,0.175,1); 
-  }
-  .slider img { 
-    width: 100%; 
-    flex-shrink: 0; 
-    border-radius: 20px; 
-    cursor: pointer;
-    transition: transform 0.5s;
-  }
-  .slider img:hover { transform: scale(1.05); }
+/* اسلایدر */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 30px 0;
+}
+.slider { display:flex; transition: transform 0.8s cubic-bezier(0.77,0,0.175,1);}
+.slider img { width:100%; flex-shrink:0; border-radius:20px; cursor:pointer; transition: transform 0.5s;}
+.slider img:hover { transform: scale(1.05); }
+.slider-buttons { position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; transform:translateY(-50%); padding:0 15px;}
+.slider-buttons button {
+  background: rgba(255,255,255,0.2);
+  border:none;
+  color:#fff;
+  padding:12px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:22px;
+  transition: background 0.3s, transform 0.3s;
+}
+.slider-buttons button:hover { background: rgba(255,255,255,0.6); transform: scale(1.2); }
 
-  .slider-buttons { 
-    position: absolute; top: 50%; width: 100%; 
-    display: flex; justify-content: space-between; 
-    transform: translateY(-50%); padding: 0 15px; 
-  }
-  .slider-buttons button { 
-    background: rgba(0,0,0,0.5); 
-    border: none; 
-    color: #fff; 
-    padding: 12px; 
-    border-radius: 50%; 
-    cursor: pointer; 
-    font-size: 22px; 
-    transition: background 0.3s, transform 0.3s; 
-  }
-  .slider-buttons button:hover { 
-    background: rgba(0,0,0,0.8); 
-    transform: scale(1.2); 
-  }
+/* دکمه‌ها */
+.buttons { text-align:center; margin-top:30px; }
+.buttons a {
+  display:inline-block;
+  margin:12px;
+  padding:15px 30px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+  transition: all 0.3s;
+  font-size:16px;
+}
+.bazar { background: linear-gradient(45deg,#00c853,#b2ff59);}
+.myket { background: linear-gradient(45deg,#ff1744,#ff5252); cursor:default;}
+.buttons a:hover { transform: translateY(-5px) scale(1.05); opacity:0.9; }
 
-  /* دکمه‌ها */
-  .buttons { text-align: center; margin-top: 30px; }
-  .buttons a { 
-    display: inline-block; 
-    margin: 12px; 
-    padding: 15px 30px; 
-    border-radius: 12px; 
-    text-decoration: none; 
-    color: #fff; 
-    font-weight: bold; 
-    transition: all 0.3s; 
-    font-size: 16px;
-  }
-  .bazar { background: linear-gradient(45deg, #00c853, #b2ff59); }
-  .myket { background: linear-gradient(45deg, #ff1744, #ff5252); cursor: default; }
-  .buttons a:hover { transform: translateY(-5px) scale(1.05); opacity: 0.9; }
+/* تغییرات نسخه جدید */
+.new-features {
+  background: rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:15px;
+  margin-top:40px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  transition: transform 0.3s;
+}
+.new-features:hover { transform: translateY(-5px); }
+.new-features ul { list-style: disc; padding-right:25px; }
+.new-features li { margin-bottom:12px; font-size:1.05rem; color:#ddd; }
 
-  /* تغییرات نسخه جدید */
-  .new-features { 
-    background: linear-gradient(145deg, #ffffff, #f0f0f3); 
-    padding: 25px; 
-    border-radius: 15px; 
-    margin-top: 40px; 
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.05), -5px -5px 15px rgba(255,255,255,0.7); 
-    transition: transform 0.3s; 
-  }
-  .new-features:hover { transform: translateY(-5px); }
-  .new-features ul { list-style: disc; padding-right: 25px; }
-  .new-features li { margin-bottom: 12px; font-size: 1.05rem; }
+/* فوتر */
+footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size:14px; }
 
-  footer { 
-    text-align: center; 
-    padding: 25px; 
-    background: linear-gradient(90deg, #4facfe, #00f2fe); 
-    margin-top: 50px; 
-    color: #fff; 
-    font-size: 14px; 
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.15); 
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  /* ریسپانسیو */
-  @media(max-width:600px){
-    section { padding: 20px; }
-    .buttons a { padding: 12px 20px; font-size: 14px; }
-  }
+/* ریسپانسیو */
+@media(max-width:600px){ section{padding:20px;} .buttons a{padding:12px 20px;font-size:14px;} }
 </style>
 </head>
 <body>
+
+<canvas id="stars"></canvas>
 
 <header>
   <img src="https://cdn.imgurl.ir/uploads/q149985_IMG_20250813_142213_173.jpg" alt="گادتوشاپ">
@@ -154,20 +124,17 @@
 
 <section>
   <h1>درباره گادتوشاپ</h1>
-  <p>
-    گادتوشاپ یک اپلیکیشن حرفه‌ای و نوآورانه است که برای گیمرها و کاربران خدمات دیجیتال طراحی شده است.  
-    با گادتوشاپ می‌توانید به راحتی خرید و فروش اکانت، خرید جم و استفاده از ابزارهای اختصاصی را در محیطی امن، سریع و کاربرپسند انجام دهید.
-  </p>
+  <p>گادتوشاپ یک اپلیکیشن حرفه‌ای و نوآورانه برای گیمرها و کاربران خدمات دیجیتال است.</p>
 
   <h2>🌟 امکانات کلیدی اپلیکیشن</h2>
   <ul>
-    <li>🧩 <b>خرید جم سریع:</b> امکان خرید جم برای بازی‌های محبوب با پرداخت امن و مستقیم.</li>
-    <li>⚡ <b>بخش سنس‌ساز:</b> ساخت سنس‌های حرفه‌ای و استفاده در بازی‌ها.</li>
-    <li>🛡️ <b>بخش واسطه‌گری:</b> انجام معاملات امن خرید و فروش اکانت.</li>
-    <li>🛒 <b>بخش فروشگاه:</b> خرید محصولات دیجیتال متنوع.</li>
-    <li>⛏️ <b>بخش ماین‌کرافت:</b> خرید اکانت‌های پرمیوم و آیتم‌های اختصاصی.</li>
-    <li>🎯 <b>پیشنهادات و مأموریت‌ها:</b> انجام مأموریت‌های ویژه برای دریافت جوایز.</li>
-    <li>🤝 <b>پشتیبانی ۲۴/۷:</b> پاسخگویی به سوالات و مشکلات کاربران.</li>
+    <li>🧩 خرید جم سریع</li>
+    <li>⚡ بخش سنس‌ساز</li>
+    <li>🛡️ بخش واسطه‌گری</li>
+    <li>🛒 بخش فروشگاه</li>
+    <li>⛏️ بخش ماین‌کرافت</li>
+    <li>🎯 پیشنهادات و مأموریت‌ها</li>
+    <li>🤝 پشتیبانی ۲۴/۷</li>
   </ul>
 
   <h2>📸 آنچه در آپدیت‌های آینده خواهید دید</h2>
@@ -197,7 +164,6 @@
       <li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر</li>
     </ul>
   </div>
-
 </section>
 
 <footer>
@@ -205,25 +171,66 @@
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+// سال جاری
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  const slider = document.querySelector('.slider');
-  const slides = document.querySelectorAll('.slider img');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  let index = 0;
+// اسلایدر
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slider img');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+let index = 0;
+function showSlide(i){
+  if(i<0) index=slides.length-1;
+  else if(i>=slides.length) index=0;
+  else index=i;
+  slider.style.transform=`translateX(-${index*100}%)`;
+}
+prev.addEventListener('click',()=>showSlide(index-1));
+next.addEventListener('click',()=>showSlide(index+1));
+setInterval(()=>showSlide(index+1),8000);
 
-  function showSlide(i){
-    if(i < 0) index = slides.length - 1;
-    else if(i >= slides.length) index = 0;
-    else index = i;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-  }
+// ستاره‌ها با ذرات و glow
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=window.innerWidth;
+let H=canvas.height=window.innerHeight;
 
-  prev.addEventListener('click', () => showSlide(index-1));
-  next.addEventListener('click', () => showSlide(index+1));
+let stars=[];
+for(let i=0;i<300;i++){
+  stars.push({
+    x:Math.random()*W,
+    y:Math.random()*H,
+    r:Math.random()*1.5+0.5,
+    dx:(Math.random()-0.5)*0.7,
+    dy:(Math.random()-0.5)*0.7,
+    glow:Math.random()*0.5+0.5
+  });
+}
 
-  setInterval(() => showSlide(index+1), 8000);
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    let gradient=ctx.createRadialGradient(s.x,s.y,s.r*0.3,s.x,s.y,s.r*3);
+    gradient.addColorStop(0,"rgba(255,255,255,"+s.glow+")");
+    gradient.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.fillStyle=gradient;
+    ctx.fill();
+
+    s.x+=s.dx; s.y+=s.dy;
+    if(s.x<0) s.x=W; if(s.x>W) s.x=0;
+    if(s.y<0) s.y=H; if(s.y>H) s.y=0;
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+window.addEventListener('resize',()=>{
+  W=canvas.width=window.innerWidth;
+  H=canvas.height=window.innerHeight;
+});
 </script>
 
 </body>
