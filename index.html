@@ -29,14 +29,11 @@ ul { list-style:none; padding:0; }
 ul li { background: rgba(255,255,255,0.05); margin:12px 0; padding:18px 22px; border-radius:20px; backdrop-filter: blur(6px); box-shadow:0 0 25px rgba(0,255,255,0.1); display:flex; align-items:center; transition:0.4s; filter: drop-shadow(0 0 5px #0ff);}
 ul li:hover { transform: translateY(-8px); box-shadow:0 0 35px rgba(0,255,255,0.3); background: rgba(0,255,255,0.1); filter: drop-shadow(0 0 10px #0ff);}
 ul li::before { content:"⭐"; margin-left:10px; font-size:1.2rem; animation: starPulse 2s infinite;}
-@keyframes starPulse {0%,100%{ transform: scale(1);}50%{ transform: scale(1.4);}}
+@keyframes starPulse {0%,100%{ transform: scale(1);}50%{ transform: scale(1.4);} }
 
 .slider-container { position: relative; overflow: hidden; border-radius: 25px; margin: 40px 0; width: 100%; }
-
 .slider { position: relative; width: 100%; }
-
 .slider img { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: auto; max-width:100%; opacity: 0; transition: opacity 1.5s ease-in-out; border-radius:25px; }
-
 .slider img.active { opacity: 1; }
 
 /* دکمه‌ها */
@@ -49,9 +46,26 @@ ul li::before { content:"⭐"; margin-left:10px; font-size:1.2rem; animation: st
 .new-features { background: rgba(255,255,255,0.05); padding:25px; border-radius:20px; margin-top:45px; backdrop-filter: blur(6px); box-shadow:0 0 35px rgba(0,255,255,0.1);}
 .new-features ul li { margin-bottom:14px; font-size:1.05rem; color:#ddd; display:flex; align-items:center; filter: drop-shadow(0 0 5px #0ff);}
 .new-features li::before { content:"✨"; margin-left:10px; font-size:1.2rem; animation: sparkle 2s infinite;}
-@keyframes sparkle {0%,100%{transform:scale(1);}50%{transform:scale(1.4);}}
+@keyframes sparkle {0%,100%{transform:scale(1);}50%{transform:scale(1.4);} }
 
-footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size:14px; text-shadow:0 0 15px #0ff;}
+footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size:14px; text-shadow:0 0 15px #0ff; }
+footer .support-box {
+  margin-top:25px;
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:18px;
+  background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
+  box-shadow: 0 0 25px rgba(0,255,255,0.4);
+  backdrop-filter: blur(6px);
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 12px #0ff;
+}
+footer .support-box a {
+  color:#0ff;
+  text-decoration:none;
+}
 
 @media(max-width:600px){ section{padding:20px;} .buttons a{padding:12px 20px;font-size:14px;} }
 </style>
@@ -98,14 +112,18 @@ footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size
 <ul>
 <li>بهبود رابط کاربری و طراحی جذاب‌تر</li>
 <li>اضافه شدن امکانات جدید در بخش سنس‌ساز</li>
-<li>مشکلات درگاه پرداخت برطرف شد</li>
+<li>💳 مشکلات درگاه پرداخت برطرف شد</li>
 <li>بهینه‌سازی سرعت اپلیکیشن و تجربه کاربری بهتر</li>
 </ul>
 </div>
 </section>
 
 <footer>
-© <span id="year"></span> گادتوشاپ — همه حقوق محفوظ است.
+  <p>© <span id="year"></span> گادتوشاپ — همه حقوق محفوظ است.</p>
+  <div class="support-box">
+    📞 شماره تلفن پشتیبانی:
+    <a href="tel:09193963732">09193963732</a>
+  </div>
 </footer>
 
 <script>
