@@ -48,26 +48,28 @@ ul li::before { content:"⭐"; margin-left:10px; font-size:1.2rem; animation: st
 .new-features li::before { content:"✨"; margin-left:10px; font-size:1.2rem; animation: sparkle 2s infinite;}
 @keyframes sparkle {0%,100%{transform:scale(1);}50%{transform:scale(1.4);} }
 
-footer { text-align:center; padding:25px; margin-top:50px; color:#fff; font-size:14px; text-shadow:0 0 15px #0ff; }
+footer { text-align:center; padding:25px; }
 footer .support-box {
-  margin-top:25px;
   display:inline-block;
-  padding:14px 28px;
+  padding:12px 24px;
   border-radius:18px;
   background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
-  box-shadow: 0 0 25px rgba(0,255,255,0.4);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4);
   backdrop-filter: blur(6px);
   font-size:16px;
   font-weight:bold;
   color:#fff;
-  text-shadow:0 0 12px #0ff;
+  text-shadow:0 0 10px #0ff;
+  max-width:90%;
+  word-wrap: break-word;
 }
-footer .support-box a {
-  color:#0ff;
-  text-decoration:none;
-}
+footer .support-box a { color:#0ff; text-decoration:none; }
 
-@media(max-width:600px){ section{padding:20px;} .buttons a{padding:12px 20px;font-size:14px;} }
+@media(max-width:600px){ 
+  section{padding:20px;} 
+  .buttons a{padding:12px 20px;font-size:14px;} 
+  footer .support-box{padding:10px 16px; font-size:14px;} 
+}
 </style>
 </head>
 <body>
@@ -119,16 +121,15 @@ footer .support-box a {
 </section>
 
 <footer>
-  <p>© <span id="year"></span></p>
   <div class="support-box">
-    📞 شماره تلفن پشتیبانی:
+    📞 شماره تلفن پشتیبانی: 
     <a href="tel:09193963732">09193963732</a>
   </div>
 </footer>
 
 <script>
 // سال جاری
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year')?.textContent = new Date().getFullYear();
 
 // اسلایدر Fade و تنظیم ارتفاع خودکار
 const slides = document.querySelectorAll('.slider img');
