@@ -51,24 +51,22 @@ ul li::before { content:"⭐"; margin-left:10px; font-size:1.2rem; animation: st
 footer { text-align:center; padding:25px; }
 footer .support-box {
   display:inline-block;
-  padding:12px 24px;
+  padding:14px 28px;
   border-radius:18px;
   background: linear-gradient(45deg, rgba(0,255,255,0.15), rgba(0,255,255,0.05));
-  box-shadow: 0 0 20px rgba(0,255,255,0.4);
+  box-shadow: 0 0 25px rgba(0,255,255,0.4);
   backdrop-filter: blur(6px);
   font-size:16px;
   font-weight:bold;
   color:#fff;
-  text-shadow:0 0 10px #0ff;
-  max-width:90%;
-  word-wrap: break-word;
+  text-shadow:0 0 12px #0ff;
 }
 footer .support-box a { color:#0ff; text-decoration:none; }
 
 @media(max-width:600px){ 
   section{padding:20px;} 
   .buttons a{padding:12px 20px;font-size:14px;} 
-  footer .support-box{padding:10px 16px; font-size:14px;} 
+  footer .support-box{padding:12px 20px; font-size:14px;} 
 }
 </style>
 </head>
@@ -128,9 +126,6 @@ footer .support-box a { color:#0ff; text-decoration:none; }
 </footer>
 
 <script>
-// سال جاری
-document.getElementById('year')?.textContent = new Date().getFullYear();
-
 // اسلایدر Fade و تنظیم ارتفاع خودکار
 const slides = document.querySelectorAll('.slider img');
 const sliderContainer = document.querySelector('.slider-container');
